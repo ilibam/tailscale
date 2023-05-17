@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+ tailscale:
+  image: 'tailscale/tailscale:stable'
+  container_name: tailscale
+  network_mode: "host"
+  command: tailscaled -tun ts0 --port=41641
+  restart: always
+  volumes:
+    - ./lib:/var/lib
+    - /var/run:/var/run
+    - /lib/modules:/lib/modules
+    - /dev/net/tun:/dev/net/tun
+  privileged: true
+  cap_add:
+    - all
+EOLX
